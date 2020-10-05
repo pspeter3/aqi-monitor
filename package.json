@@ -1,0 +1,24 @@
+{
+  "name": "aqi-monitor",
+  "private": true,
+  "description": "Micro service for calculating AQI from Purple Air.",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pspeter3/aqi-monitor.git"
+  },
+  "keywords": [
+    "aqi",
+    "purpleair",
+    "typescript"
+  ],
+  "author": "Phips Peter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pspeter3/aqi-monitor/issues"
+  },
+  "homepage": "https://github.com/pspeter3/aqi-monitor#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
