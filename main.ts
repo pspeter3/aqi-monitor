@@ -1,0 +1,1 @@
+console.log("aqi-monitor");
