@@ -6,7 +6,8 @@
     "fmt": "prettier --write 'src/**/*'",
     "lint": "eslint 'src/**/*'",
     "spec": "jest -ci",
-    "start": "ts-node src/main.ts"
+    "start": "ts-node src/main.ts",
+    "test": "prettier --check 'src/**/*' && npm run lint && npm run spec"
   },
   "repository": {
     "type": "git",
