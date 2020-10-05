@@ -3,10 +3,12 @@
   "private": true,
   "description": "Micro service for calculating AQI from Purple Air.",
   "scripts": {
+    "build": "tsc",
+    "dev": "npm run build && npm start",
     "fmt": "prettier --write 'src/**/*'",
     "lint": "eslint 'src/**/*'",
     "spec": "jest -ci",
-    "start": "ts-node src/main.ts",
+    "start": "node dist/main.js",
     "test": "prettier --check 'src/**/*' && npm run lint && npm run spec"
   },
   "repository": {
@@ -35,7 +37,6 @@
     "jest": "^26.5.0",
     "prettier": "^2.1.2",
     "ts-jest": "^26.4.1",
-    "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   },
   "eslintConfig": {
