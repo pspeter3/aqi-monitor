@@ -1,6 +1,6 @@
-import { name } from "./main";
+import { name } from "./utils";
 
-describe("main", () => {
+describe("utils", () => {
     describe("name", () => {
         it("should be the project name", () => {
             expect(name).toEqual("aqi-monitor");
