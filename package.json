@@ -4,6 +4,7 @@
   "description": "Micro service for calculating AQI from Purple Air.",
   "scripts": {
     "fmt": "prettier --write 'src/**/*'",
+    "spec": "jest -ci",
     "start": "ts-node src/main.ts"
   },
   "repository": {
@@ -23,10 +24,17 @@
   "homepage": "https://github.com/pspeter3/aqi-monitor#readme",
   "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^26.0.14",
     "@types/node": "^14.11.2",
+    "jest": "^26.5.0",
     "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "preset": "ts-jest"
   },
   "prettier": {
     "tabWidth": 4,

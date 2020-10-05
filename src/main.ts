@@ -1,1 +1,1 @@
-console.log("aqi-monitor");
+export const name = "aqi-monitor";
