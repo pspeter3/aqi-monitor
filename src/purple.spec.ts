@@ -111,11 +111,13 @@ describe("purple", () => {
             await expect(client({ id: 1 })).resolves.toEqual({
                 lat: 0,
                 lon: 0,
-                particles: 15,
-                humidity: 72,
-                temperature: 60,
-                pressure: 1000,
-                aqi: 31.749166666666667,
+                data: {
+                    particles: 15,
+                    humidity: 72,
+                    temperature: 60,
+                    pressure: 1000,
+                    aqi: 31.749166666666667,
+                },
             });
             server.close();
         });

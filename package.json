@@ -28,6 +28,7 @@
   "homepage": "https://github.com/pspeter3/aqi-monitor#readme",
   "dependencies": {
     "ajv": "^6.12.5",
+    "geolib": "^3.3.1",
     "http-errors": "^1.8.0",
     "node-fetch": "^2.6.1"
   },

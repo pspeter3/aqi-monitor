@@ -8,11 +8,13 @@ describe("handler", () => {
                 Promise.resolve({
                     lat: 0,
                     lon: 0,
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
             const handler = createHandler(3000, client);
@@ -20,11 +22,13 @@ describe("handler", () => {
             expect(res).toEqual(
                 expect.objectContaining({
                     ids: [1],
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
         });
@@ -34,11 +38,13 @@ describe("handler", () => {
                 Promise.resolve({
                     lat: 0,
                     lon: 0,
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
             const handler = createHandler(3000, client);
@@ -48,11 +54,45 @@ describe("handler", () => {
             expect(res).toEqual(
                 expect.objectContaining({
                     ids: [1, 2],
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
+                })
+            );
+        });
+
+        it("should respond for interpolate", async () => {
+            const client = jest.fn().mockReturnValue(
+                Promise.resolve({
+                    lat: 0,
+                    lon: 0,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
+                })
+            );
+            const handler = createHandler(3000, client);
+            const res = await handler(
+                createRequest({ url: "/?show=1&show=2&lat=0&lon=0" })
+            );
+            expect(res).toEqual(
+                expect.objectContaining({
+                    ids: [1, 2],
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
         });
@@ -60,7 +100,7 @@ describe("handler", () => {
         it("should error for no url", async () => {
             const client = jest.fn();
             const handler = createHandler(3000, client);
-            expect(handler(createRequest())).rejects.toThrow();
+            await expect(handler(createRequest())).rejects.toThrow();
         });
     });
 });
