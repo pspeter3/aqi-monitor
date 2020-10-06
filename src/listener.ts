@@ -34,9 +34,9 @@ const writeResponse = (res: ServerResponse): ((data: unknown) => void) => (
 };
 
 export const createListener = (
-    factory: (req: IncomingMessage) => Promise<unknown>
+    handler: (req: IncomingMessage) => Promise<unknown>
 ): RequestListener => (req, res) => {
     logRequest(req, res);
     const write = writeResponse(res);
-    factory(req).then(write, write);
+    handler(req).then(write, write);
 };
