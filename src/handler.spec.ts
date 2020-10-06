@@ -68,7 +68,7 @@ describe("handler", () => {
         it("should error for no url", async () => {
             const client = jest.fn();
             const handler = createHandler(3000, client);
-            expect(handler(createRequest())).rejects.toThrow();
+            await expect(handler(createRequest())).rejects.toThrow();
         });
     });
 });
