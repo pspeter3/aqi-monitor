@@ -13,7 +13,7 @@ const listener: RequestListener = (req, res) => {
                 res.statusCode,
                 `${Date.now() - date.getTime()}ms`,
                 `${res.getHeader("Content-Length") || 0}b`,
-            ].join(" "),
+            ].join(" ")
         );
     });
     res.setHeader("Content-Type", "text/plain;charset=utf-8");
