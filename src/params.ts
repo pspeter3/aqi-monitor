@@ -10,13 +10,10 @@ export interface BaseParams {
 export interface LocationParams extends BaseParams {
     readonly lat: number;
     readonly lon: number;
+    readonly pow?: number;
 }
 
-export interface PowerParams extends LocationParams {
-    readonly pow: number;
-}
-
-export type Params = BaseParams | LocationParams | PowerParams;
+export type Params = BaseParams | LocationParams;
 
 const validate = new Ajv({ coerceTypes: true }).compile({
     $schema: "http://json-schema.org/schema",
@@ -79,4 +76,11 @@ export const parseParams = (query: string): Params | never => {
         throw err;
     }
     return data as Params;
+};
+
+export const isLocationParams = (params: Params): params is LocationParams => {
+    return (
+        (params as LocationParams).lat !== undefined &&
+        (params as LocationParams).lon !== undefined
+    );
 };

@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { parseParams } from "./params";
+import { isLocationParams, parseParams } from "./params";
 
 describe("params", () => {
     describe("parseParams", () => {
@@ -91,6 +91,21 @@ describe("params", () => {
                     parseParams(stringify({ show: 1, pow: 2 }))
                 ).toThrow();
             });
+        });
+    });
+
+    describe("isLocationParams", () => {
+        it("should be false for base params", () => {
+            expect(isLocationParams({ show: 1 })).toEqual(false);
+        });
+
+        it("should be false for missing params", () => {
+            expect(isLocationParams({ show: 1, lat: 0 })).toEqual(false);
+            expect(isLocationParams({ show: 1, lon: 0 })).toEqual(false);
+        });
+
+        it("should be true for both params", () => {
+            expect(isLocationParams({ show: 1, lat: 0, lon: 0 })).toEqual(true);
         });
     });
 });

@@ -1,8 +1,8 @@
 import { IncomingMessage } from "http";
-import { parseParams } from "./params";
+import { isLocationParams, parseParams } from "./params";
 import { PurpleClient } from "./purple";
 import { SensorData } from "./sensor";
-import { mean } from "./summary";
+import { interpolate, mean } from "./summary";
 
 export interface APIResponse {
     readonly timestamp: number;
@@ -15,9 +15,12 @@ export const createHandler = (
     client: PurpleClient
 ): ((req: IncomingMessage) => Promise<APIResponse>) => async (req) => {
     const url = new URL(req.url || "/", `http://localhost:${port}`);
-    const { key, show } = parseParams(url.searchParams.toString());
+    const params = parseParams(url.searchParams.toString());
+    const { key, show } = params;
     const ids = Array.isArray(show) ? show : [show];
     const sensors = await Promise.all(ids.map((id) => client({ key, id })));
-    const data = mean(sensors);
+    const data = isLocationParams(params)
+        ? interpolate(params, sensors)
+        : mean(sensors);
     return { timestamp: Date.now(), ids, data };
 };
