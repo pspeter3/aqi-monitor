@@ -8,11 +8,13 @@ describe("handler", () => {
                 Promise.resolve({
                     lat: 0,
                     lon: 0,
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
             const handler = createHandler(3000, client);
@@ -20,11 +22,13 @@ describe("handler", () => {
             expect(res).toEqual(
                 expect.objectContaining({
                     ids: [1],
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
         });
@@ -34,11 +38,13 @@ describe("handler", () => {
                 Promise.resolve({
                     lat: 0,
                     lon: 0,
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
             const handler = createHandler(3000, client);
@@ -48,11 +54,13 @@ describe("handler", () => {
             expect(res).toEqual(
                 expect.objectContaining({
                     ids: [1, 2],
-                    particles: 15,
-                    humidity: 72,
-                    temperature: 60,
-                    pressure: 1000,
-                    aqi: 31.749166666666667,
+                    data: {
+                        particles: 15,
+                        humidity: 72,
+                        temperature: 60,
+                        pressure: 1000,
+                        aqi: 31.749166666666667,
+                    },
                 })
             );
         });

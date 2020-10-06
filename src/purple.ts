@@ -2,16 +2,7 @@ import createHttpError from "http-errors";
 import fetch from "node-fetch";
 import { stringify } from "querystring";
 import { calculatAQI } from "./aqi";
-
-export interface Sensor {
-    readonly lat: number;
-    readonly lon: number;
-    readonly particles: number;
-    readonly humidity: number;
-    readonly temperature: number;
-    readonly pressure: number;
-    readonly aqi: number;
-}
+import { Sensor } from "./sensor";
 
 export type PurpleClient = (params: {
     key?: string;
@@ -47,7 +38,8 @@ export const createClient = (url: string): PurpleClient => async ({
     const temperature = parseFloat(parent.temp_f);
     const pressure = parseFloat(parent.pressure);
     const aqi = calculatAQI(particles, humidity, temperature);
-    return { lat, lon, particles, humidity, temperature, pressure, aqi };
+    const data = { particles, humidity, temperature, pressure, aqi };
+    return { lat, lon, data };
 };
 
 interface Response {
