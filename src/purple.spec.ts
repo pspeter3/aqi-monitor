@@ -3,6 +3,7 @@ import { AddressInfo } from "net";
 import { createClient } from "./purple";
 
 describe("purple", () => {
+    const key = "key";
     describe("createClient", () => {
         let port = 3001;
 
@@ -15,7 +16,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).rejects.toThrow(
+            await expect(client({ key, id: 1 })).rejects.toThrow(
                 "Purple Air API Error."
             );
             server.close();
@@ -30,7 +31,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).rejects.toThrow(
+            await expect(client({ key, id: 1 })).rejects.toThrow(
                 "Could not find parent sensor."
             );
             server.close();
@@ -45,7 +46,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).rejects.toThrow(
+            await expect(client({ key, id: 1 })).rejects.toThrow(
                 "Invalid parent sensor."
             );
             server.close();
@@ -60,7 +61,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).rejects.toThrow(
+            await expect(client({ key, id: 1 })).rejects.toThrow(
                 "Invalid parent sensor."
             );
             server.close();
@@ -79,7 +80,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).rejects.toThrow(
+            await expect(client({ key, id: 1 })).rejects.toThrow(
                 "Invalid parent sensor."
             );
             server.close();
@@ -108,7 +109,7 @@ describe("purple", () => {
             const client = createClient(
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
-            await expect(client({ id: 1 })).resolves.toEqual({
+            await expect(client({ key, id: 1 })).resolves.toEqual({
                 lat: 0,
                 lon: 0,
                 data: {

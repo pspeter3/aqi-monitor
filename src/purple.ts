@@ -5,7 +5,7 @@ import { calculatAQI } from "./aqi";
 import { Sensor } from "./sensor";
 
 export type PurpleClient = (params: {
-    key?: string;
+    key: string;
     id: number;
 }) => Promise<Sensor>;
 

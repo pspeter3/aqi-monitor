@@ -18,7 +18,9 @@ describe("handler", () => {
                 })
             );
             const handler = createHandler(3000, client);
-            const res = await handler(createRequest({ url: "/?show=1" }));
+            const res = await handler(
+                createRequest({ url: "/?key=key&show=1" })
+            );
             expect(res).toEqual(
                 expect.objectContaining({
                     ids: [1],
@@ -49,7 +51,7 @@ describe("handler", () => {
             );
             const handler = createHandler(3000, client);
             const res = await handler(
-                createRequest({ url: "/?show=1&show=2" })
+                createRequest({ url: "/?key=key&show=1&show=2" })
             );
             expect(res).toEqual(
                 expect.objectContaining({
@@ -81,7 +83,7 @@ describe("handler", () => {
             );
             const handler = createHandler(3000, client);
             const res = await handler(
-                createRequest({ url: "/?show=1&show=2&lat=0&lon=0" })
+                createRequest({ url: "/?key=key&show=1&show=2&lat=0&lon=0" })
             );
             expect(res).toEqual(
                 expect.objectContaining({
