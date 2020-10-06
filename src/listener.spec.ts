@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-done-callback */
 import { EventEmitter } from "events";
 import createHttpError from "http-errors";
 import { createRequest, createResponse } from "node-mocks-http";
