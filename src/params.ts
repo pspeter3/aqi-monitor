@@ -3,7 +3,7 @@ import Ajv from "ajv";
 import createHttpError from "http-errors";
 
 export interface BaseParams {
-    readonly key?: string;
+    readonly key: string;
     readonly show: number | ReadonlyArray<number>;
 }
 
@@ -53,7 +53,7 @@ const validate = new Ajv({ coerceTypes: true }).compile({
             minimum: 0,
         },
     },
-    required: ["show"],
+    required: ["key", "show"],
     dependencies: {
         lat: ["lon"],
         lon: ["lat"],
