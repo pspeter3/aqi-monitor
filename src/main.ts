@@ -1,29 +1,15 @@
-import { createServer, RequestListener } from "http";
-import { name } from "./utils";
-
-const listener: RequestListener = (req, res) => {
-    const date = new Date();
-    res.on("finish", () => {
-        console.info(
-            [
-                req.connection.remoteAddress,
-                date.toISOString(),
-                req.method,
-                req.url,
-                res.statusCode,
-                `${Date.now() - date.getTime()}ms`,
-                `${res.getHeader("Content-Length") || 0}b`,
-            ].join(" ")
-        );
-    });
-    res.setHeader("Content-Type", "text/plain;charset=utf-8");
-    res.setHeader("Content-Length", Buffer.byteLength(name, "utf-8"));
-    res.writeHead(200);
-    res.end(name);
-};
+import { createServer } from "http";
+import { createListener } from "./listener";
+import { parseParams } from "./params";
 
 const main = (port: number): void => {
-    const server = createServer(listener);
+    const server = createServer(
+        createListener(async (req) => {
+            const url = new URL(req.url!, `http://localhost:${port}`);
+            const params = parseParams(url.searchParams.toString());
+            return params;
+        })
+    );
     server.listen(port);
 };
 
