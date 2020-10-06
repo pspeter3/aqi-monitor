@@ -1,14 +1,13 @@
 import { createServer } from "http";
+import { createHandler } from "./handler";
 import { createListener } from "./listener";
-import { parseParams } from "./params";
+import { createClient } from "./purple";
 
 const main = (port: number): void => {
     const server = createServer(
-        createListener(async (req) => {
-            const url = new URL(req.url || "/", `http://localhost:${port}`);
-            const params = parseParams(url.searchParams.toString());
-            return params;
-        })
+        createListener(
+            createHandler(port, createClient("https://www.purpleair.com/json"))
+        )
     );
     server.listen(port);
 };
