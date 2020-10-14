@@ -98,9 +98,9 @@ describe("purple", () => {
                                 humidity: "72",
                                 temp_f: "60",
                                 pressure: "1000",
-                                Stats: JSON.stringify({ v1: 15 }),
+                                pm2_5_cf_1: 15,
                             },
-                            { ParentID: 0, Stats: JSON.stringify({ v1: 15 }) },
+                            { ParentID: 0, pm2_5_cf_1: 15 },
                         ],
                     })
                 );
@@ -117,7 +117,7 @@ describe("purple", () => {
                     humidity: 72,
                     temperature: 60,
                     pressure: 1000,
-                    aqi: 31.749166666666667,
+                    aqi: 31.405,
                 },
             });
             server.close();

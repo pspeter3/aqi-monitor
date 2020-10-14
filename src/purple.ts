@@ -1,7 +1,7 @@
 import createHttpError from "http-errors";
 import fetch from "node-fetch";
 import { stringify } from "querystring";
-import { calculatAQI } from "./aqi";
+import { calculateAQI } from "./aqi";
 import { Sensor } from "./sensor";
 
 export type PurpleClient = (params: {
@@ -32,12 +32,12 @@ export const createClient = (url: string): PurpleClient => async ({
     const lon: number = parent.Lon;
     const particles =
         results
-            .map((result) => JSON.parse(result.Stats)["v1"])
+            .map((result) => parseFloat(result.pm2_5_cf_1))
             .reduce((sum, value) => sum + value) / results.length;
     const humidity = parseFloat(parent.humidity);
     const temperature = parseFloat(parent.temp_f);
     const pressure = parseFloat(parent.pressure);
-    const aqi = calculatAQI(particles, humidity, temperature);
+    const aqi = calculateAQI(particles, humidity);
     const data = { particles, humidity, temperature, pressure, aqi };
     return { lat, lon, data };
 };
