@@ -1,15 +1,15 @@
-import { calculatAQI } from "./aqi";
+import { calculateAQI } from "./aqi";
 
 describe("aqi", () => {
     describe("calculateAQI", () => {
         it("should return the EPA value", () => {
             // Based on San Francisco sensors
-            expect(Math.round(calculatAQI(14.28, 72, 60))).toEqual(30);
+            expect(Math.round(calculateAQI(7.14, 38))).toEqual(26);
         });
 
         it("should throw for high numbers", () => {
             // Based on Battle Mountain sensors
-            expect(() => calculatAQI(1000, 25, 77)).toThrow();
+            expect(() => calculateAQI(1000, 25)).toThrow();
         });
     });
 });
