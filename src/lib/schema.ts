@@ -9,7 +9,9 @@ export interface LocationParams {
     readonly pow?: number;
 }
 
-export interface PurpleParamsWithLocation extends PurpleParams, LocationParams {}
+export interface PurpleParamsWithLocation
+    extends PurpleParams,
+        LocationParams {}
 
 export type Params = PurpleParams | PurpleParamsWithLocation;
 
