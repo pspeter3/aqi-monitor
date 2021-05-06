@@ -1,5 +1,4 @@
 import createHttpError from "http-errors";
-import fetch from "node-fetch";
 import { stringify } from "querystring";
 import { calculateAQI } from "./aqi";
 import { Sensor } from "./sensor";
