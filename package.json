@@ -3,13 +3,16 @@
   "private": true,
   "description": "Micro service for calculating AQI from Purple Air.",
   "scripts": {
-    "build": "tsc --project tsconfig.prod.json",
-    "dev": "npm run build && npm start",
-    "fmt": "prettier --write 'src/**/*'",
-    "lint": "eslint 'src/**/*'",
-    "spec": "jest -ci",
-    "start": "node dist/main.js",
-    "test": "prettier --check 'src/**/*' && npm run lint && npm run spec"
+    "dev": "next dev",
+    "fix": "npm run fix:lint && npm run fix:format",
+    "fix:format": "prettier --write 'src/**/*' '*.{js,md}'",
+    "fix:lint": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "build": "next build",
+    "start": "next start",
+    "test": "npm run test:format && npm run test:lint && npm run test:types",
+    "test:format": "prettier --check 'src/**/*' '*.{js,md}'",
+    "test:lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test:types": "tsc --pretty"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "ajv": "^6.12.5",
     "geolib": "^3.3.1",
     "http-errors": "^1.8.0",
+    "next": "^10.2.0",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
@@ -37,6 +41,7 @@
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.2",
     "@types/node-fetch": "^2.5.7",
+    "@types/react": "^17.0.5",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.10.0",
