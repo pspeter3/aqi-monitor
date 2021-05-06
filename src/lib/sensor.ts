@@ -25,13 +25,19 @@ const metrics: ReadonlyArray<SensorMetric> = [
     "aqi",
 ];
 
-const createSensorData = (): Record<SensorMetric, number> =>
-    metrics.reduce(
+function createSensorData(): Record<SensorMetric, number> {
+    return metrics.reduce(
         (data, key) => ({ ...data, [key]: 0 }),
         {} as Record<SensorMetric, number>
     );
+}
 
-export const mean = (sensors: ReadonlyArray<Sensor>): SensorData => {
+/**
+ * Calculates the mean sensor data for a list of sensors.
+ * @param sensors The sensors to evaluate.
+ * @returns The mean sensor data.
+ */
+export function mean(sensors: ReadonlyArray<Sensor>): SensorData {
     const data = createSensorData();
     for (const sensor of sensors) {
         for (const metric of metrics) {
@@ -44,10 +50,22 @@ export const mean = (sensors: ReadonlyArray<Sensor>): SensorData => {
     return data;
 };
 
-export const interpolate = (
-    { lat, lon, pow }: { lat: number; lon: number; pow?: number },
+export interface InterpolationParams {
+    readonly lat: number;
+    readonly lon: number;
+    readonly pow?: number;
+}
+
+/**
+ * Interpolates sensor data from a list of sensors.
+ * @param params The interpolation params.
+ * @param sensors The sensors to evaluate.
+ * @returns The interpolated sensor data.
+ */
+export function interpolate(
+    { lat, lon, pow }: InterpolationParams,
     sensors: ReadonlyArray<Sensor>
-): SensorData => {
+): SensorData {
     const power = pow || 1;
     let total = 0;
     const data = createSensorData();
