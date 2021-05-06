@@ -1,23 +1,23 @@
 import { createServer, Server } from "http";
 import { AddressInfo } from "net";
-import { PurpleClient } from "./purple";
+import { Purple, PurpleClient } from "./purple";
 
-describe("PurpleClient", () => {
+describe("Purple", () => {
     describe("epa", () => {
         it("should return the EPA value", () => {
             // Based on San Francisco sensors
-            expect(Math.round(PurpleClient.epa(7.14, 38))).toEqual(26);
+            expect(Math.round(Purple.epa(7.14, 38))).toEqual(26);
         });
 
         it("should throw for high numbers", () => {
             // Based on Battle Mountain sensors
-            expect(() => PurpleClient.epa(1000, 25)).toThrow();
+            expect(() => Purple.epa(1000, 25)).toThrow();
         });
     });
 
     describe("constructor", () => {
         it("should not require a base URL", () => {
-            expect(() => new PurpleClient("key")).not.toThrow();
+            expect(() => new Purple("key")).not.toThrow();
         });
     });
 
@@ -26,7 +26,7 @@ describe("PurpleClient", () => {
         const id = 1;
 
         const createClient = (server: Server): PurpleClient =>
-            new PurpleClient(
+            new Purple(
                 "key",
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );

@@ -1,5 +1,21 @@
 import { getDistance } from "geolib";
-import { Sensor, SensorData, SensorMetric } from "./sensor";
+
+export interface SensorData {
+    readonly particles: number;
+    readonly humidity: number;
+    readonly temperature: number;
+    readonly pressure: number;
+    readonly aqi: number;
+}
+
+export type SensorMetric = keyof SensorData;
+
+export interface Sensor {
+    readonly id: number;
+    readonly lat: number;
+    readonly lon: number;
+    readonly data: SensorData;
+}
 
 const metrics: ReadonlyArray<SensorMetric> = [
     "particles",
@@ -9,7 +25,7 @@ const metrics: ReadonlyArray<SensorMetric> = [
     "aqi",
 ];
 
-const createSensorData = () =>
+const createSensorData = (): Record<SensorMetric, number> =>
     metrics.reduce(
         (data, key) => ({ ...data, [key]: 0 }),
         {} as Record<SensorMetric, number>

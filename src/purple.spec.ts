@@ -110,6 +110,7 @@ describe("purple", () => {
                 `http://localhost:${(server.address() as AddressInfo).port}`
             );
             await expect(client({ key, id: 1 })).resolves.toEqual({
+                id: 1,
                 lat: 0,
                 lon: 0,
                 data: {

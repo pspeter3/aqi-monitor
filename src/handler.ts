@@ -1,8 +1,7 @@
 import { IncomingMessage } from "http";
 import { isLocationParams, parseParams } from "./params";
 import { PurpleClient } from "./purple";
-import { SensorData } from "./sensor";
-import { interpolate, mean } from "./summary";
+import { SensorData, interpolate, mean } from "./lib/sensor";
 
 export interface APIResponse {
     readonly timestamp: number;

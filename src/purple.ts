@@ -38,7 +38,7 @@ export const createClient = (url: string): PurpleClient => async ({
     const pressure = parseFloat(parent.pressure);
     const aqi = calculateAQI(particles, humidity);
     const data = { particles, humidity, temperature, pressure, aqi };
-    return { lat, lon, data };
+    return { id, lat, lon, data };
 };
 
 interface Response {

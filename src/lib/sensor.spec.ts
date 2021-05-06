@@ -1,11 +1,12 @@
-import { interpolate, mean } from "./summary";
+import { interpolate, mean } from "./sensor";
 
-describe("summary", () => {
+describe("sensor", () => {
     describe("mean", () => {
         it("should calculate the average", () => {
             expect(
                 mean([
                     {
+                        id: 0,
                         lat: 0,
                         lon: 0,
                         data: {
@@ -17,6 +18,7 @@ describe("summary", () => {
                         },
                     },
                     {
+                        id: 1,
                         lat: 0,
                         lon: 0,
                         data: {
@@ -43,6 +45,7 @@ describe("summary", () => {
             expect(
                 interpolate({ lat: 37.7749, lon: -122.4194 }, [
                     {
+                        id: 0,
                         lat: 37.77,
                         lon: -122.41,
                         data: {
@@ -54,6 +57,7 @@ describe("summary", () => {
                         },
                     },
                     {
+                        id: 1,
                         lat: 37.78,
                         lon: -122.42,
                         data: {
@@ -78,6 +82,7 @@ describe("summary", () => {
             expect(
                 interpolate({ lat: 37.7749, lon: -122.4194, pow: 2 }, [
                     {
+                        id: 0,
                         lat: 37.77,
                         lon: -122.41,
                         data: {
@@ -89,6 +94,7 @@ describe("summary", () => {
                         },
                     },
                     {
+                        id: 1,
                         lat: 37.78,
                         lon: -122.42,
                         data: {

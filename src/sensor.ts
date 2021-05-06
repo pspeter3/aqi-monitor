@@ -9,6 +9,7 @@ export interface SensorData {
 export type SensorMetric = keyof SensorData;
 
 export interface Sensor {
+    readonly id: number;
     readonly lat: number;
     readonly lon: number;
     readonly data: SensorData;

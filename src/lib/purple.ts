@@ -1,11 +1,15 @@
 import createHttpError from "http-errors";
 import { stringify } from "querystring";
-import { Sensor } from "./schema";
+import { Sensor } from "./sensor";
+
+export interface PurpleClient {
+    sensor(id: number): Promise<Sensor>;
+}
 
 /**
  * PurpleAir API Client.
  */
-export class PurpleClient {
+export class Purple implements PurpleClient {
     private readonly key: string;
     private readonly url: string;
 
@@ -27,12 +31,9 @@ export class PurpleClient {
      */
     static epa(particles: number, humidity: number): number {
         const value = 0.534 * particles - 0.0844 * humidity + 5.604;
-        for (const [
-            index,
-            [maxPM, maxAQI],
-        ] of PurpleClient.AQI_LIMITS.entries()) {
+        for (const [index, [maxPM, maxAQI]] of Purple.AQI_LIMITS.entries()) {
             if (value < maxPM) {
-                const [minPM, minAQI] = PurpleClient.AQI_LIMITS[index - 1];
+                const [minPM, minAQI] = Purple.AQI_LIMITS[index - 1];
                 return (
                     ((maxAQI - minAQI) / (maxPM - minPM)) * (value - minPM) +
                     minAQI
@@ -84,7 +85,7 @@ export class PurpleClient {
         const humidity = parseFloat(parent.humidity);
         const temperature = parseFloat(parent.temp_f);
         const pressure = parseFloat(parent.pressure);
-        const aqi = PurpleClient.epa(particles, humidity);
+        const aqi = Purple.epa(particles, humidity);
         const data = { particles, humidity, temperature, pressure, aqi };
         return { id, lat, lon, data };
     }
