@@ -48,7 +48,7 @@ export function mean(sensors: ReadonlyArray<Sensor>): SensorData {
         data[metric] = data[metric] / sensors.length;
     }
     return data;
-};
+}
 
 export interface InterpolationParams {
     readonly lat: number;
@@ -88,4 +88,4 @@ export function interpolate(
         data[metric] = data[metric] / total;
     }
     return data;
-};
+}

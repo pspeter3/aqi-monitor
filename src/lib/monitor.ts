@@ -1,5 +1,11 @@
 import { PurpleClient } from "./purple";
-import { interpolate, InterpolationParams, mean, Sensor, SensorData } from "./sensor";
+import {
+    interpolate,
+    InterpolationParams,
+    mean,
+    Sensor,
+    SensorData,
+} from "./sensor";
 
 export interface MonitorResponse {
     readonly timestamp: number;
@@ -15,10 +21,13 @@ export interface MonitorResponse {
  * @param params The interpolation params.
  * @returns The monitoring data.
  */
-export async function monitor(client: PurpleClient, ids: ReadonlyArray<number>, params?: InterpolationParams): Promise<MonitorResponse> {
+export async function monitor(
+    client: PurpleClient,
+    ids: ReadonlyArray<number>,
+    params?: InterpolationParams
+): Promise<MonitorResponse> {
     const sensors = await Promise.all(ids.map((id) => client.sensor(id)));
-    const data = params !== undefined
-        ? interpolate(params, sensors)
-        : mean(sensors);
+    const data =
+        params !== undefined ? interpolate(params, sensors) : mean(sensors);
     return { timestamp: Date.now(), ids, data, sensors };
 }

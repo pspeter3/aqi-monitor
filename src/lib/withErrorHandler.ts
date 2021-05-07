@@ -14,7 +14,7 @@ export interface ErrorResponse {
  * @returns The wrapped handler.
  */
 export function withErrorHandler<T>(
-    handler: NextApiHandler<T>,
+    handler: NextApiHandler<T>
 ): NextApiHandler<T | ErrorResponse> {
     return async function (req, res) {
         try {
